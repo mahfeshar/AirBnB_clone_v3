@@ -1,0 +1,40 @@
+#!/usr/bin/python3
+"""hi it is me cities.py"""
+
+from api.v1.views import app_views
+from flask import abort, jsonify, make_response, request
+from models import storage
+from models.city import City
+from models.state import State
+
+
+@app_views.route('/states/<string:state_id>/cities', methods=['GET'],
+                 strict_slashes=False)
+def get_cities(state_id):
+    """get the city information for all cities in a specified state"""
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
+    cities = []
+    for city in state.cities:
+        cities.append(city.to_dict())
+    return jsonify(cities)
+
+
+@app_views.route('/cities/<string:city_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_city(city_id):
+    """now it is time to get city information for specified city"""
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+    return jsonify(city.to_dict())
+
+
+@app_views.route('/cities/<string:city_id>', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_city(city_id):
+    """delete a city based on its city_id"""
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
