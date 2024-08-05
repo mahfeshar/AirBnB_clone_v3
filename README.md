@@ -150,9 +150,6 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) quit
 ```
 
-## Bugs
-No known bugs at this time. 
-
 ## Authors
 Mahmoud Feshar - [Github](https://github.com/mahfeshar) / [Twitter](https://twitter.com/mahfeshar)  
 Alhassan Youssef - [Github](https://github.com/alhassan-youssef)
